@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untukmu Sayang ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Sacramento&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- VARIABLES & RESET --- */
+        :root {
+            --primary: #ff2e63;
+            --secondary: #08d9d6;
+            --dark: #252a34;
+            --light: #eaeaea;
+            --pink: #ff9ff3;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--dark);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- BACKGROUND ANIMATION --- */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            overflow: hidden;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,46,99,0.1) 0%, transparent 50%);
+            animation: rotateBg 20s linear infinite;
+        }
+
+        .bg-animation::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+                radial-gradient(2px 2px at 40px 70px, #fff, transparent),
+                radial-gradient(2px 2px at 50px 160px, #ddd, transparent),
+                radial-gradient(2px 2px at 90px 40px, #fff, transparent),
+                radial-gradient(2px 2px at 130px 80px, #fff, transparent),
+                radial-gradient(2px 2px at 160px 120px, #ddd, transparent);
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: twinkle 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes rotateBg {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        /* --- FLOATING HEARTS --- */
+        .floating-heart {
+            position: absolute;
+            font-size: 20px;
+            color: var(--primary);
+            opacity: 0;
+            animation: floatHeart 6s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes floatHeart {
+            0% { 
+                transform: translateY(100vh) scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.9;
+            }
+            100% { 
+                transform: translateY(-100px) scale(1.2) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* --- SPLASH SCREEN (AWAL) --- */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a1a2e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: transform 0.8s ease, opacity 0.8s ease;
+        }
+
+        .splash-content {
+            text-align: center;
+        }
+
+        .heart-icon {
+            font-size: 80px;
+            color: var(--primary);
+            animation: heartbeat 1s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(255,46,99,0.5);
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .splash-text {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            color: var(--light);
+            font-weight: 300;
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- HEADER SECTION --- */
+        .header {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+            box-shadow: 0 0 30px rgba(255,46,99,0.4);
+        }
+
+        .avatar-ring {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px dashed var(--secondary);
+            border-radius: 50%;
+            animation: spinRing 10s linear infinite;
+        }
+
+        @keyframes spinRing {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .title {
+            font-family: 'Sacramento', cursive;
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 10px rgba(255,46,99,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            font-weight: 300;
+        }
+
+        /* --- PHOTO SLIDER --- */
+        .photo-slider {
+            position: relative;
+            width: 100%;
+            height: 350px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 30px 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .slider-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .slider-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .slider-dot.active {
+            background: var(--primary);
+            width: 30px;
+            border-radius: 5px;
+        }
+
+        .slider-arrows {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+            pointer-events: none;
+        }
+
+        .slider-arrow {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            pointer-events: all;
+            transition: 0.3s;
+        }
+
+        .slider-arrow:hover {
+            background: var(--primary);
+        }
+
+        /* --- MESSAGE CARDS --- */
+        .message-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .message-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            text-align: center;
+            color: var(--light);
+        }
+
+        .message-text b {
+            color: var(--primary);
+        }
+
+        .message-highlight {
+            background: linear-gradient(120deg, rgba(255,46,99,0.2) 0%, rgba(255,46,99,0.1) 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--pink);
+            border-left: 4px solid var(--primary);
+            border-right: 4px solid var(--primary);
+        }
+
+        /* --- TIMER SECTION --- */
+        .timer-section {
+            background: linear-gradient(135deg, rgba(255,46,99,0.2), rgba(8,217,214,0.2));
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .timer-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .timer-item {
+            background: rgba(0,0,0,0.3);
+            padding: 15px 10px;
+            border-radius: 10px;
+        }
+
+        .timer-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .timer-label {
+            font-size: 0.7rem;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        /* --- ACTION BUTTONS (PROPOSE) --- */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 18px 20px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-accept {
+            background: linear-gradient(45deg, #00b894, #55efc4);
+            color: white;
+            box-shadow: 0 5px 20px rgba(0,184,148,0.4);
+        }
+
+        .btn-accept:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0,184,148,0.6);
+        }
+
+        .btn-reject {
+            background: transparent;
+            border: 2px solid #636e72;
+            color: #636e72;
+        }
+
+        .btn-reject:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* --- RESPONSE SCREEN --- */
+        #response-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .response-content {
+            text-align: center;
+            padding: 40px;
+            animation: popIn 0.5s ease;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .response-icon {
+            font-size: 100px;
+            margin-bottom: 30px;
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .response-title {
+            font-size: 3rem;
+            font-family: 'Sacramento', cursive;
+            margin-bottom: 20px;
+        }
+
+        .response-message {
+            font-size: 1.2rem;
+            color: #aaa;
+            max-width: 400px;
+            line-height: 1.6;
+        }
+
+        /* --- CONFETTI --- */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            top: -10px;
+            animation: confettiFall 3s linear forwards;
+            z-index: 10001;
+        }
+
+        @keyframes confettiFall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* --- FIREWORKS --- */
+        .firework {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            animation: firework 1.5s ease-out forwards;
+        }
+
+        @keyframes firework {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        /* --- MUSIC PLAYER --- */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(255,46,99,0.5);
+            z-index: 100;
+            transition: transform 0.3s;
+        }
+
+        .music-player:hover {
+            transform: scale(1.1);
+        }
+
+        .music-player i {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .music-wave {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            animation: wave 1.5s ease-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes wave {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        /* --- FOOTER --- */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 480px) {
+            .title { font-size: 2.5rem; }
+            .photo-slider { height: 280px; }
+            .timer-grid { gap: 5px; }
+            .timer-number { font-size: 1.4rem; }
+            .action-buttons { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Animation -->
+    <div class="bg-animation"></div>
+    
+    <!-- Floating Hearts Container -->
+    <div id="hearts-container"></div>
+
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <div class="splash-content">
+            <i class="fas fa-heart heart-icon"></i>
+            <div class="splash-text">Special Message For You!</div>
+        </div>
+    </div>
+
+    <!-- Response Screen (Hidden) -->
+    <div id="response-screen">
+        <div class="response-content">
+            <i class="fas fa-heart response-icon" id="response-icon"></i>
+            <h1 class="response-title" id="response-title"></h1>
+            <p class="response-message" id="response-message"></p>
+        </div>
+    </div>
+
+    <!-- Music Player -->
+    <div class="music-player" id="music-player" onclick="toggleMusic()">
+        <div class="music-wave"></div>
+        <i class="fas fa-music"></i>
+    </div>
+    <audio id="bg-music" loop>
+        <!-- GANTI LINK LAGU DI BAWAH INI -->
+        <source src="Assets/Skyline - real love (Official Lyric Video) [KG4jBKfCMBw].mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Main Content -->
+    <div class="container">
+        
+        <!-- Header -->
+        <div class="header">
+            <div class="avatar-wrapper">
+                <div class="avatar-ring"></div>
+                <!-- GANTI FOTO KAMU (Pria) - Ganti URL di bawah -->
+                <img src="Assets/SS.jpeg" alt="Foto Kamu" class="avatar">
+            </div>
+            <h1 class="title">Hey, [Sayangnya Akuu]! ❤️</h1>
+            <p class="subtitle">Aku Mau Bilang Sesuatu</p>
+        </div>
+
+        <!-- Photo Slider -->
+        <div class="photo-slider">
+            <div class="slider-track" id="slider-track">
+                <!-- GANTI FOTO KALIAN DI BAWAH INI - Ganti URL -->
+                <div class="slide">
+                    <img src="Assets/a.jpeg" alt="Foto 1">
+                    <div class="slide-caption">MaLovvvvvv ❤️</div>
+                </div>
+                <div class="slide">
+                    <img src="Assets/2.jpeg" alt="Foto 2">
+                    <div class="slide-caption">So Beautiful 🥺</div>
+                </div>
+                <div class="slide">
+                    <img src="Assets/b.jpeg" alt="Foto 3">
+                    <div class="slide-caption">I Love U ✨</div>
+                </div>
+                <div class="slide">
+                    <img src="Assets/c.jpeg" alt="Foto 4">
+                    <div class="slide-caption">You are my everything 💕</div>
+                </div>
+            </div>
+            <div class="slider-nav" id="slider-nav">
+                <div class="slider-dot active" onclick="goToSlide(0)"></div>
+                <div class="slider-dot" onclick="goToSlide(1)"></div>
+                <div class="slider-dot" onclick="goToSlide(2)"></div>
+                <div class="slider-dot" onclick="goToSlide(3)"></div>
+            </div>
+            <div class="slider-arrows">
+                <div class="slider-arrow" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></div>
+                <div class="slider-arrow" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></div>
+            </div>
+        </div>
+
+        <!-- Message -->
+        <div class="message-card">
+            <p class="message-text">
+                <b>[Sayangkuuuu]</b>,<br><br>
+                Kamu Lucu<br>
+                <br>
+                Kamu Manis<br>
+                <br>
+                Kamu Cantik<br>
+                <br>
+                Sayang Banget sama Kamu<br>
+                <br>
+                Love u Love u Love u Love u Love u Love u Love u Love u <br><br>    
+                <b>Boleh ga sama aku aja, Jangan sama yang lain</b>
+            </p>
+            
+            <div class="message-highlight">
+                " Will U Be My GirlFriend? ❤️"
+            </div>
+        </div>
+
+        <!-- Timer Section (Jika sudah jadian, isi tanggal pacaran) -->
+        <div class="timer-section">
+            <div class="timer-title">⏰ Waktu Kita Bersama</div>
+            <div class="timer-grid">
+                <div class="timer-item">
+                    <div class="timer-number" id="days">00</div>
+                    <div class="timer-label">Hari</div>
+                </div>
+                <div class="timer-item">
+                    <div class="timer-number" id="hours">00</div>
+                    <div class="timer-label">Jam</div>
+                </div>
+                <div class="timer-item">
+                    <div class="timer-number" id="minutes">00</div>
+                    <div class="timer-label">Menit</div>
+                </div>
+                <div class="timer-item">
+                    <div class="timer-number" id="seconds">00</div>
+                    <div class="timer-label">Detik</div>
+                </div>
+            </div>
+            <!-- GANTI TANGGAL PACARAN KALIAN (YYYY-MM-DD) -->
+            <p style="margin-top: 15px; font-size: 0.9rem; color: #666;">Mulai dari: <span id="start-date">27-02-2026</span></p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="btn btn-accept" onclick="acceptProposal()">❤️ Mau</button>
+            <button class="btn btn-reject" onclick="rejectProposal()">Gak, Mau 🤪</button>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>❤️❤️❤️❤️❤️❤️❤️</p>
+        </div>
+
+    </div>
+
+    <script>
+        // --- VARIABLES ---
+        let currentSlide = 0;
+        const totalSlides = 4;
+        let musicPlaying = false;
+        let heartInterval;
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create floating hearts
+            createHearts();
+            
+            // Auto slide
+            setInterval(autoSlide, 5000);
+            
+            // Hide splash screen after 2 seconds
+            setTimeout(() => {
+                document.getElementById('splash-screen').style.transform = 'translateY(-100%)';
+                document.getElementById('splash-screen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('splash-screen').style.display = 'none';
+                }, 800);
+            }, 2000);
+
+            // Start timer
+            startTimer();
+        });
+
+        // --- SLIDER FUNCTIONS ---
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlider();
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        }
+
+        function autoSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        }
+
+        function updateSlider() {
+            const track = document.getElementById('slider-track');
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update dots
+            const dots = document.querySelectorAll('.slider-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // --- MUSIC FUNCTIONS ---
+        function toggleMusic() {
+            const music = document.getElementById('bg-music');
+            const player = document.getElementById('music-player');
+            
+            if (musicPlaying) {
+                music.pause();
+                player.classList.remove('playing');
+            } else {
+                music.play().catch(e => console.log('Autoplay blocked'));
+                player.classList.add('playing');
+            }
+            musicPlaying = !musicPlaying;
+        }
+
+        // --- PROPOSAL FUNCTIONS ---
+        function acceptProposal() {
+            const responseScreen = document.getElementById('response-screen');
+            const responseIcon = document.getElementById('response-icon');
+            const responseTitle = document.getElementById('response-title');
+            const responseMessage = document.getElementById('response-message');
+            
+            responseIcon.className = 'fas fa-heart response-icon';
+            responseIcon.style.color = '#00b894';
+            responseTitle.textContent = 'Yey! Kita Pacaran! ❤️';
+            responseTitle.style.color = '#00b894';
+            responseMessage.textContent = 'Edannnnn Jadi. I love you BADAGGGGGGG! 💕';
+            
+            responseScreen.style.display = 'flex';
+            
+            // Create confetti
+            createConfetti();
+            
+            // Create fireworks
+            createFireworks();
+        }
+
+        function rejectProposal() {
+            const responseScreen = document.getElementById('response-screen');
+            const responseIcon = document.getElementById('response-icon');
+            const responseTitle = document.getElementById('response-title');
+            const responseMessage = document.getElementById('response-message');
+            
+            responseIcon.className = 'fas fa-heart response-icon';
+            responseIcon.style.color = '#00b894';
+            responseTitle.textContent = 'Deymmmm';
+            responseTitle.style.color = '#636e72';
+            responseMessage.textContent = 'Tetep Jadi da yey gaboleh ngga, Mwhhhhhhhh Mwhhhhhhhh Mwhhhhhhhh Mwhhhhhhhh Mwhhhhhhhh Mwhhhhhhhh 🤪🙏🤣';
+            
+            responseScreen.style.display = 'flex';
+        }
+
+        // --- CONFETTI FUNCTION ---
+        function createConfetti() {
+            const colors = ['#ff2e63', '#08d9d6', '#ff9ff3', '#feca57', '#54a0ff', '#5f27cd'];
+            
+            for (let i = 0; i < 150; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 4000);
+                }, i * 20);
+            }
+        }
+
+        // --- FIREWORKS FUNCTION ---
+        function createFireworks() {
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    for (let j = 0; j < 30; j++) {
+                        const firework = document.createElement('div');
+                        firework.className = 'firework';
+                        firework.style.left = Math.random() * 100 + 'vw';
+                        firework.style.top = Math.random() * 50 + 'vh';
+                        firework.style.backgroundColor = ['#ff2e63', '#08d9d6', '#ff9ff3', '#feca57'][Math.floor(Math.random() * 4)];
+                        firework.style.boxShadow = `0 0 10px ${firework.style.backgroundColor}`;
+                        document.body.appendChild(firework);
+                        
+                        setTimeout(() => firework.remove(), 1500);
+                    }
+                }, i * 500);
+            }
+        }
+
+        // --- FLOATING HEARTS ---
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            const hearts = ['❤️', '💕', '💗', '💖', '💓', '💘'];
+            
+            heartInterval = setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+                container.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 7000);
+            }, 500);
+        }
+
+        // --- TIMER FUNCTION ---
+        function startTimer() {
+            // GANTI TANGGAL PACARAN KALIAN (Format: YYYY-MM-DD)
+            const startDate = new Date('2026-02-27T00:00:00');
+            
+            function updateTimer() {
+                const now = new Date();
+                const diff = now - startDate;
+                
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            }
+            
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        }
+    </script>
+</body>
+</html>
